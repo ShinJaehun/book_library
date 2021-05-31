@@ -58,6 +58,7 @@ gem 'bulma-rails'
 gem 'sidekiq'
 gem 'simple_form'
 gem 'mini_magick'
+gem 'stripe'
 
 group :development, :test do
   gem 'better_errors'
