@@ -48,8 +48,12 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    customer = Stripe::Customer.retrieve(current_user.stripe_id)
-    customer.subscriptions.retrieve(current_user.stripe_subscription_id).delete
+    Stripe.api_key = Rails.application.credentials.stripe_api_key
+    Stripe::Subscription.delete(current_user.stripe_subscription_id)
+
+#    customer = Stripe::Customer.retrieve(current_user.stripe_id)
+#    puts current_user.stripe_id
+#    customer.subscriptions.retrieve(current_user.stripe_subscription_id).delete
     current_user.update(stripe_subscription_id: nil)
     current_user.subscribed = false
 
